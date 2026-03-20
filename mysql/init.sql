@@ -212,6 +212,29 @@ INSERT INTO services (title, slug, icon, description, features, sort_order) VALU
     4
 );
 
+-- ── Table: contact_submissions ───────────────────────────────
+CREATE TABLE IF NOT EXISTS contact_submissions (
+    id          INT          UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    full_name   VARCHAR(120) NOT NULL,
+    email       VARCHAR(180) NOT NULL,
+    company     VARCHAR(120)          DEFAULT NULL,
+    phone       VARCHAR(30)           DEFAULT NULL,
+    service     VARCHAR(80)  NOT NULL COMMENT 'Service enquired about',
+    budget      VARCHAR(60)           DEFAULT NULL,
+    message     TEXT         NOT NULL,
+    status      ENUM('new','read','replied') NOT NULL DEFAULT 'new',
+    ip_address  VARCHAR(45)           DEFAULT NULL,
+    created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_status    (status),
+    INDEX idx_service   (service),
+    INDEX idx_created   (created_at),
+    INDEX idx_ip        (ip_address)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='MENSA Tech Agency — Client Contact Submissions';
+
 -- ── Grants ───────────────────────────────────────────────────
 GRANT SELECT, INSERT, UPDATE, DELETE ON mensa_db.* TO 'mensa_user'@'%';
 FLUSH PRIVILEGES;
@@ -219,3 +242,4 @@ FLUSH PRIVILEGES;
 -- ── Verify (shows in docker logs on first run) ───────────────
 SELECT CONCAT('✔  Seeded ', COUNT(*), ' team members') AS init_status FROM team_members;
 SELECT id, full_name, reg_number, student_no, is_lead FROM team_members ORDER BY is_lead DESC, id ASC;
+SELECT CONCAT('✔  contact_submissions table ready') AS init_status;

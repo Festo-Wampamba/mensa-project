@@ -24,72 +24,69 @@ try {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MENSA Tech Agency — Enterprise services: Web Hosting, Software Development, System Administration, and Networking." />
   <title>Our Services — MENSA Tech Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    .service-full {
-      background: var(--clr-bg-card); border: 1px solid var(--clr-border);
-      border-radius: var(--radius-lg); padding: 48px 40px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-      align-items: start; transition: all var(--transition);
-    }
-    .service-full:hover { border-color: var(--clr-accent); box-shadow: var(--shadow-glow); }
-    .service-full:nth-child(even) { direction: rtl; }
-    .service-full:nth-child(even) > * { direction: ltr; }
-    .service-num { font-family: var(--font-display); font-size: 4rem; font-weight: 800; color: rgba(0,212,255,0.07); line-height: 1; margin-bottom: 16px; }
-    .features-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .features-list li {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.9rem; color: var(--clr-text); padding: 8px 12px;
-      background: rgba(0,212,255,0.04); border-radius: var(--radius-sm);
-      border: 1px solid var(--clr-border);
-    }
-    .features-list li::before { content: '✓'; color: var(--clr-accent); font-weight: 700; flex-shrink: 0; }
-    .features-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--clr-accent); margin-bottom: 14px; font-family: var(--font-display); }
-    @media (max-width: 768px) {
-      .service-full { grid-template-columns: 1fr; direction: ltr !important; }
-      .service-full:nth-child(even) { direction: ltr; }
-    }
-  </style>
 </head>
 <body>
 
-<nav class="navbar">
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
   <div class="navbar-inner">
-    <a href="index.php" class="navbar-logo"><div class="logo-icon">M</div>MENSA</a>
+    <a href="index.php" class="navbar-logo">
+      <div class="logo-mark">M</div>
+      MENSA
+    </a>
     <ul class="navbar-links">
       <li><a href="index.php">Home</a></li>
       <li><a href="services.php" class="active">Services</a></li>
       <li><a href="team.php">Our Team</a></li>
-      <li><a href="index.php#contact" class="btn-nav">Contact Us</a></li>
+      <li><a href="contact.php" class="btn-nav">Contact Us</a></li>
     </ul>
   </div>
 </nav>
 
-<section class="section" style="padding-top:140px;padding-bottom:40px;">
+<!-- ── PAGE HEADER ───────────────────────────────────────── -->
+<section class="section" style="padding-top:140px; padding-bottom:3rem; background:var(--bg-secondary);">
   <div class="container">
-    <span class="section-label">What We Offer</span>
-    <h1 class="section-title">Enterprise Services,<br>Delivered by Engineers.</h1>
-    <p class="section-subtitle">MENSA's four core service pillars — staffed by specialists who live and breathe infrastructure.</p>
+    <div class="reveal">
+      <span class="section-eyebrow">02 — What We Offer</span>
+      <h1 class="section-title" style="font-size:clamp(2.4rem,5vw,3.8rem);">
+        Enterprise Services,<br><em>Delivered by Engineers.</em>
+      </h1>
+      <p class="section-subtitle">
+        Four core service pillars — staffed by specialists who live and breathe
+        infrastructure, software, and networks.
+      </p>
+    </div>
   </div>
 </section>
 
-<section class="section" style="padding-top:20px;">
+<!-- ── SERVICES LIST ─────────────────────────────────────── -->
+<section class="section" style="padding-top:3rem;">
   <div class="container">
+
     <?php if ($dbError): ?>
-      <div class="db-notice" style="margin-bottom:40px;">⚠ DB unavailable: <?= htmlspecialchars($dbError) ?></div>
+      <div class="db-notice reveal" style="margin-bottom:3rem;">
+        ⚠ Database unavailable: <?= htmlspecialchars($dbError) ?>
+      </div>
     <?php endif; ?>
 
     <?php if (!empty($services)): ?>
-      <div style="display:flex;flex-direction:column;gap:40px;">
+      <div style="display:flex; flex-direction:column; gap:2rem;">
         <?php foreach ($services as $i => $svc): ?>
           <?php $features = json_decode($svc['features'] ?? '[]', true) ?? []; ?>
-          <article class="service-full">
+          <article class="service-full reveal">
             <div>
-              <div class="service-num"><?= str_pad((string)($i+1), 2, '0', STR_PAD_LEFT) ?></div>
-              <div class="service-icon" style="margin-bottom:20px;"><?= htmlspecialchars($svc['icon']) ?></div>
-              <h2 style="font-size:1.6rem;margin-bottom:16px;"><?= htmlspecialchars($svc['title']) ?></h2>
-              <p style="color:var(--clr-text-muted);font-size:0.95rem;line-height:1.8;"><?= htmlspecialchars($svc['description']) ?></p>
+              <div class="service-num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></div>
+              <div class="service-icon" style="margin-bottom:1.5rem;"><?= htmlspecialchars($svc['icon']) ?></div>
+              <h2 style="font-family:var(--font-display);font-size:1.7rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:1rem;">
+                <?= htmlspecialchars($svc['title']) ?>
+              </h2>
+              <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.85;">
+                <?= htmlspecialchars($svc['description']) ?>
+              </p>
             </div>
             <div>
               <?php if (!empty($features)): ?>
@@ -104,45 +101,87 @@ try {
           </article>
         <?php endforeach; ?>
       </div>
+
     <?php else: ?>
       <div class="services-grid">
-        <article class="service-card"><div class="service-icon">🌐</div><h3 class="service-title">Web Hosting</h3><p class="service-desc">Enterprise-grade hosting with 99.9% SLA.</p></article>
-        <article class="service-card"><div class="service-icon">💻</div><h3 class="service-title">Software Development</h3><p class="service-desc">Full-cycle custom applications.</p></article>
-        <article class="service-card"><div class="service-icon">🖥️</div><h3 class="service-title">System Administration</h3><p class="service-desc">Professional Linux server management.</p></article>
-        <article class="service-card"><div class="service-icon">🔗</div><h3 class="service-title">Networking</h3><p class="service-desc">End-to-end network design and DNS.</p></article>
+        <article class="service-card reveal">
+          <div class="service-number">01</div>
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">Web Hosting</h3>
+          <p class="service-desc">Enterprise-grade hosting with 99.9% SLA.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">02</div>
+          <div class="service-icon">💻</div>
+          <h3 class="service-title">Software Development</h3>
+          <p class="service-desc">Full-cycle custom applications.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">03</div>
+          <div class="service-icon">🖥️</div>
+          <h3 class="service-title">System Administration</h3>
+          <p class="service-desc">Professional Linux server management.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">04</div>
+          <div class="service-icon">🔗</div>
+          <h3 class="service-title">Networking</h3>
+          <p class="service-desc">End-to-end network design and DNS.</p>
+        </article>
       </div>
     <?php endif; ?>
+
   </div>
 </section>
 
+<!-- ── CTA ───────────────────────────────────────────────── -->
 <section class="cta-section">
   <div class="container">
-    <div class="cta-inner">
-      <span class="section-label">Let's Talk</span>
+    <div class="cta-inner reveal">
+      <span class="section-eyebrow">Let's Talk</span>
       <h2 class="section-title">Start Your Project Today</h2>
-      <p>Tell us what you're building and we'll design the right solution.</p>
+      <p>Tell us what you're building and we'll engineer the right solution.</p>
       <div class="hero-cta" style="justify-content:center;">
-        <a href="mailto:info@mensa.local" class="btn-primary">Get In Touch →</a>
+        <a href="contact.php" class="btn-primary">Get In Touch →</a>
         <a href="team.php" class="btn-secondary">Meet the Team</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <p class="footer-copy">
       &copy; <?= date('Y') ?> MENSA Tech Agency &mdash;
-      Architected by <strong style="color:var(--clr-accent);">Wampamba Festo</strong>,
+      Architected by <span class="accent-name">Wampamba Festo</span>,
       Lead Software Engineer &amp; Architect.
     </p>
     <ul class="footer-links">
       <li><a href="index.php">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Team</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </div>
 </footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>

@@ -25,30 +25,44 @@ try {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MENSA Tech Agency — Enterprise web hosting, software development, system administration and networking." />
-  <title>MENSA Tech Agency — Empowering Digital Infrastructure</title>
+  <meta name="description" content="MENSA Tech Agency — Enterprise web hosting, software development, system administration and networking. Uganda's premier tech agency." />
+  <title>MENSA Tech Agency — Engineering the Digital Future</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-<nav class="navbar">
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
   <div class="navbar-inner">
-    <a href="index.php" class="navbar-logo"><div class="logo-icon">M</div>MENSA</a>
+    <a href="index.php" class="navbar-logo">
+      <div class="logo-mark">M</div>
+      MENSA
+    </a>
     <ul class="navbar-links">
       <li><a href="index.php" class="active">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Our Team</a></li>
-      <li><a href="#contact" class="btn-nav">Contact Us</a></li>
+      <li><a href="contact.php" class="btn-nav">Contact Us</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ───────────────────────────────────────────────── -->
 <section class="hero" id="home">
-  <div class="container">
+  <div class="hero-orb one"></div>
+  <div class="hero-orb two"></div>
+  <div class="hero-inner">
+
     <div class="hero-content">
-      <div class="hero-eyebrow"><span>Uganda's Premier Tech Agency</span></div>
-      <h1>Engineering the<br><span class="highlight">Digital Future</span> — Reliably.</h1>
+      <div class="hero-label">
+        <span>Uganda's Premier Tech Agency</span>
+      </div>
+      <h1 class="hero-title">
+        Engineering the<br>
+        <span class="italic">Digital Future</span> —<br>
+        Reliably.
+      </h1>
       <p class="hero-desc">
         MENSA delivers enterprise-grade infrastructure and software solutions.
         From blazing-fast web hosting to complex system architecture,
@@ -59,26 +73,71 @@ try {
         <a href="team.php" class="btn-secondary">Meet Our Team</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime SLA</div></div>
-        <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Core Services</div></div>
-        <div class="stat-item"><div class="stat-number">9</div><div class="stat-label">Expert Engineers</div></div>
-        <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Support</div></div>
+        <div class="stat-item">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Core Services</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">9</div>
+          <div class="stat-label">Expert Engineers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Support</div>
+        </div>
       </div>
     </div>
+
+    <div class="hero-visual">
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <span class="terminal-title">mensa@server:~$</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">$ </span><span class="t-cmd">docker compose up -d</span></div>
+          <div class="t-out">✔ Network mensa_net    Created</div>
+          <div class="t-out">✔ Container mensa_db   Started</div>
+          <div class="t-out">✔ Container mensa_web  Started</div>
+          <div class="t-out">✔ Container mensa_dns  Started</div>
+          <br>
+          <div><span class="t-prompt">$ </span><span class="t-cmd">dig @172.28.0.53 bbcmensa.com</span></div>
+          <div class="t-out">bbcmensa.com. 86400 IN A 172.28.0.10</div>
+          <br>
+          <div><span class="t-prompt">$ </span><span class="t-cmd">curl -I http://bbcmensa.com</span></div>
+          <div class="t-out">HTTP/1.1 200 OK</div>
+          <div class="t-comment"># All systems operational ✔</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ── SERVICES ───────────────────────────────────────────── -->
 <section class="section section--alt" id="services">
   <div class="container">
-    <span class="section-label">What We Do</span>
-    <h2 class="section-title">Core Services</h2>
-    <p class="section-subtitle">Four pillars of technology excellence, delivered by certified engineers with real-world infrastructure experience.</p>
+    <div class="section-header reveal">
+      <span class="section-eyebrow">02 — What We Do</span>
+      <h2 class="section-title">Core Services</h2>
+      <p class="section-subtitle">
+        Four pillars of technology excellence, delivered by certified engineers
+        with real-world infrastructure experience.
+      </p>
+    </div>
+
     <div class="services-grid">
       <?php if (!empty($services)): ?>
-        <?php foreach ($services as $svc): ?>
+        <?php foreach ($services as $i => $svc): ?>
           <?php $features = json_decode($svc['features'] ?? '[]', true) ?? []; ?>
-          <article class="service-card">
+          <article class="service-card reveal">
+            <div class="service-number"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></div>
             <div class="service-icon"><?= htmlspecialchars($svc['icon']) ?></div>
             <h3 class="service-title"><?= htmlspecialchars($svc['title']) ?></h3>
             <p class="service-desc"><?= htmlspecialchars(mb_strimwidth($svc['description'], 0, 110, '…')) ?></p>
@@ -90,103 +149,185 @@ try {
           </article>
         <?php endforeach; ?>
       <?php else: ?>
-        <article class="service-card"><div class="service-icon">🌐</div><h3 class="service-title">Web Hosting</h3><p class="service-desc">99.9% uptime SLA with 24/7 support.</p></article>
-        <article class="service-card"><div class="service-icon">💻</div><h3 class="service-title">Software Development</h3><p class="service-desc">Full-cycle custom software engineering.</p></article>
-        <article class="service-card"><div class="service-icon">🖥️</div><h3 class="service-title">System Administration</h3><p class="service-desc">Professional Linux server management.</p></article>
-        <article class="service-card"><div class="service-icon">🔗</div><h3 class="service-title">Networking</h3><p class="service-desc">End-to-end network design and DNS.</p></article>
+        <article class="service-card reveal">
+          <div class="service-number">01</div>
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">Web Hosting</h3>
+          <p class="service-desc">99.9% uptime SLA with 24/7 technical support.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">02</div>
+          <div class="service-icon">💻</div>
+          <h3 class="service-title">Software Development</h3>
+          <p class="service-desc">Full-cycle custom software engineering.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">03</div>
+          <div class="service-icon">🖥️</div>
+          <h3 class="service-title">System Administration</h3>
+          <p class="service-desc">Professional Linux server management.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">04</div>
+          <div class="service-icon">🔗</div>
+          <h3 class="service-title">Networking</h3>
+          <p class="service-desc">End-to-end network design and DNS.</p>
+        </article>
       <?php endif; ?>
     </div>
-    <div style="text-align:center;margin-top:48px;">
+
+    <div style="text-align:center; margin-top:3rem;" class="reveal">
       <a href="services.php" class="btn-secondary">View All Service Details →</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ── ABOUT ──────────────────────────────────────────────── -->
 <section class="section" id="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-text">
-        <span class="section-label">Why MENSA</span>
+
+      <div class="reveal">
+        <span class="section-eyebrow">03 — Why MENSA</span>
         <h2 class="section-title">Infrastructure Built to Last</h2>
-        <p>We don't just set up servers — we architect resilient, scalable, and secure digital infrastructure. Every configuration decision is made with long-term operational excellence in mind.</p>
-        <p>From Dockerised microservices and Bind9 DNS management to hardened Apache configurations and MySQL architecture, MENSA engineers bring production-level thinking to every project.</p>
-        <div class="about-features">
-          <div class="about-feature"><div class="about-feature-icon">🐳</div><div><h4>Containerised Infrastructure</h4><p>Docker-first approach for portable, reproducible environments</p></div></div>
-          <div class="about-feature"><div class="about-feature-icon">🔒</div><div><h4>Security by Design</h4><p>Least-privilege access, encrypted connections, hardened configs</p></div></div>
-          <div class="about-feature"><div class="about-feature-icon">📡</div><div><h4>Full DNS Control</h4><p>Authoritative Bind9 DNS with forward & reverse zone management</p></div></div>
+        <p class="about-text" style="color:var(--text-secondary);font-size:.97rem;line-height:1.85;margin-bottom:1.2rem;">
+          We don't just set up servers — we architect <strong style="color:var(--text-primary)">resilient, scalable, and secure</strong>
+          digital infrastructure. Every configuration decision is made with long-term operational excellence in mind.
+        </p>
+        <p style="color:var(--text-secondary);font-size:.97rem;line-height:1.85;margin-bottom:2rem;">
+          From Dockerised microservices and Bind9 DNS management to hardened Apache configurations
+          and MySQL architecture, MENSA engineers bring production-level thinking to every project.
+        </p>
+        <div class="about-pillars">
+          <div class="about-pillar">
+            <div class="about-pillar-icon">🐳</div>
+            <div>
+              <h4>Containerised Infrastructure</h4>
+              <p>Docker-first approach for portable, reproducible environments</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="about-pillar-icon">🔒</div>
+            <div>
+              <h4>Security by Design</h4>
+              <p>Least-privilege access, encrypted connections, hardened configs</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="about-pillar-icon">📡</div>
+            <div>
+              <h4>Full DNS Control</h4>
+              <p>Authoritative Bind9 DNS with forward &amp; reverse zone management</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
+
+      <div class="reveal">
         <div class="terminal-card">
           <div class="terminal-header">
-            <div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div>
-            <span class="terminal-title">mensa@server:~$</span>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">mensa@prod — docker ps</span>
           </div>
           <div class="terminal-body">
-            <div><span class="t-prompt">$ </span><span class="t-cmd">docker compose up -d</span></div>
-            <div class="t-out">✔ Network mensa_net    Created</div>
-            <div class="t-out">✔ Container mensa_db   Started</div>
-            <div class="t-out">✔ Container mensa_web  Started</div>
-            <div class="t-out">✔ Container mensa_dns  Started</div>
+            <div><span class="t-prompt">$ </span><span class="t-cmd">docker ps --format "table {{.Names}}\t{{.Status}}"</span></div>
+            <div class="t-out">NAMES          STATUS</div>
+            <div class="t-out">mensa_web      Up 14 days (healthy)</div>
+            <div class="t-out">mensa_db       Up 14 days (healthy)</div>
+            <div class="t-out">mensa_dns      Up 14 days</div>
             <br>
-            <div><span class="t-prompt">$ </span><span class="t-cmd">dig @172.28.0.53 mensa.local</span></div>
-            <div class="t-out">mensa.local. 86400 IN A 172.28.0.10</div>
+            <div><span class="t-prompt">$ </span><span class="t-cmd">mysql -u mensa_user -e "SELECT COUNT(*) FROM team_members"</span></div>
+            <div class="t-out">+----------+</div>
+            <div class="t-out">| COUNT(*) |</div>
+            <div class="t-out">+----------+</div>
+            <div class="t-out">|        9 |</div>
+            <div class="t-out">+----------+</div>
             <br>
-            <div><span class="t-prompt">$ </span><span class="t-cmd">curl -I http://mensa.local</span></div>
-            <div class="t-out">HTTP/1.1 200 OK</div>
-            <div class="t-comment"># All systems operational ✔</div>
+            <div class="t-comment"># 9 engineers. 4 services. 1 mission. ✔</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- TEAM TEASER -->
-<section class="section section--alt">
+<!-- ── TEAM TEASER ────────────────────────────────────────── -->
+<section class="section section--alt" id="team">
   <div class="container" style="text-align:center;">
-    <span class="section-label">The People</span>
-    <h2 class="section-title">Led by Experts</h2>
-    <p class="section-subtitle" style="margin-inline:auto;">Our team of 9 engineers spans software architecture, system administration, networking, and full-stack development.</p>
-    <a href="team.php" class="btn-primary">Meet the Full Team →</a>
+    <div class="reveal">
+      <span class="section-eyebrow">04 — The People</span>
+      <h2 class="section-title">Led by Experts</h2>
+      <p class="section-subtitle" style="margin-inline:auto;">
+        Our team of 9 engineers spans software architecture, system administration,
+        networking, and full-stack development — all trained at Makerere University.
+      </p>
+      <a href="team.php" class="btn-primary">Meet the Full Team →</a>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ── CTA / CONTACT ──────────────────────────────────────── -->
 <section class="cta-section" id="contact">
   <div class="container">
-    <div class="cta-inner">
-      <span class="section-label">Get In Touch</span>
+    <div class="cta-inner reveal">
+      <span class="section-eyebrow">05 — Get In Touch</span>
       <h2 class="section-title">Ready to Build Something Great?</h2>
-      <p>Whether you need managed hosting, a custom application, or a full infrastructure overhaul — the MENSA team is ready to help.</p>
+      <p>
+        Whether you need managed hosting, a custom application, or a full
+        infrastructure overhaul — the MENSA team is ready to help.
+      </p>
       <div class="hero-cta" style="justify-content:center;">
-        <a href="mailto:info@mensa.local" class="btn-primary">info@mensa.local</a>
+        <a href="contact.php" class="btn-primary">Start a Project →</a>
         <a href="team.php" class="btn-secondary">View Our Team</a>
       </div>
       <div class="contact-methods">
         <div class="contact-pill">📍 Kampala, Uganda</div>
         <div class="contact-pill">📞 +256 700 000 001</div>
-        <div class="contact-pill">🌐 mensa.local</div>
+        <div class="contact-pill">🌐 bbcmensa.com</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <p class="footer-copy">
       &copy; <?= date('Y') ?> MENSA Tech Agency &mdash;
-      Architected by <strong style="color:var(--clr-accent);"><?= htmlspecialchars($lead['full_name'] ?? 'Wampamba Festo') ?></strong>,
+      Architected by
+      <span class="accent-name"><?= htmlspecialchars($lead['full_name'] ?? 'Wampamba Festo') ?></span>,
       Lead Software Engineer &amp; Architect.
     </p>
     <ul class="footer-links">
       <li><a href="index.php">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Team</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </div>
 </footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
