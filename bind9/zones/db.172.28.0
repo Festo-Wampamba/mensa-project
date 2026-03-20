@@ -1,0 +1,21 @@
+; ============================================================
+;  MENSA Infrastructure — DNS Reverse Zone
+;  Subnet : 172.28.0.0/24
+; ============================================================
+
+$TTL 86400
+
+@   IN  SOA     ns1.bbcmensa.com. admin.bbcmensa.com. (
+                2025062002 ; Serial
+                3600       ; Refresh
+                900        ; Retry
+                604800     ; Expire
+                86400      ; Minimum TTL
+)
+
+@   IN  NS      ns1.bbcmensa.com.
+
+; ── PTR Records (last octet → hostname) ─────────────────────
+10  IN  PTR     bbcmensa.com.
+20  IN  PTR     db.bbcmensa.com.
+53  IN  PTR     ns1.bbcmensa.com.
