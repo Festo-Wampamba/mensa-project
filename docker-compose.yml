@@ -1,0 +1,96 @@
+# ============================================================
+#  MENSA Infrastructure — Docker Compose
+#  Author : Wampamba Festo (Lead Software Engineer & Architect)
+#  Stack  : Apache/PHP 8.2 | MySQL 8.0 | Bind9 DNS
+# ============================================================
+
+version: "3.9"
+
+volumes:
+  mysql_data:
+    driver: local
+  bind9_cache:
+    driver: local
+
+networks:
+  mensa_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+
+services:
+
+# ── 1. WEB SERVER — Apache + PHP 8.2 ──────────────────────
+  web:
+    build: .
+    container_name: mensa_web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www:/var/www/bbcmensa.com:ro
+      - ./apache/mensa.conf:/etc/apache2/sites-available/mensa.conf:ro
+      - ./apache/php.ini:/usr/local/etc/php/conf.d/mensa-php.ini:ro
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=${MYSQL_DATABASE}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_PASSWORD}
+    networks:
+      mensa_net:
+        ipv4_address: 172.28.0.10
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ── 2. DATABASE — MySQL 8.0 ────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: mensa_db
+    restart: unless-stopped
+    expose:
+      - "3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=mensa26
+      - MYSQL_DATABASE=mensa_db
+      - MYSQL_USER=mensa_user
+      - MYSQL_PASSWORD=mensa26
+      - MYSQL_ROOT_HOST=%
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    networks:
+      mensa_net:
+        ipv4_address: 172.28.0.20
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=mensa26"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── 3. DNS SERVER — Bind9 ──────────────────────────────────
+  dns:
+    image: ubuntu/bind9:latest
+    container_name: mensa_dns
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./bind9/named.conf.options:/etc/bind/named.conf.options:ro
+      - ./bind9/named.conf.local:/etc/bind/named.conf.local:ro
+      - ./bind9/zones:/etc/bind/zones:ro
+      - bind9_cache:/var/cache/bind
+    environment:
+      - TZ=Africa/Kampala
+    networks:
+      mensa_net:
+        ipv4_address: 172.28.0.53
