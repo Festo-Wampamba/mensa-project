@@ -1,0 +1,22 @@
+// ============================================================
+//  MENSA Infrastructure — Bind9 Zone Declarations
+//  Author : Wampamba Festo (Lead Software Engineer & Architect)
+// ============================================================
+
+zone "bbcmensa.com" {
+    type master;
+    file "/etc/bind/zones/db.bbcmensa.com";
+    allow-transfer  { none; };
+    allow-update    { none; };
+    notify no;
+};
+
+zone "0.28.172.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.172.28.0";
+    allow-transfer { none; };
+    allow-update   { none; };
+    notify no;
+};
+
+include "/etc/bind/zones.rfc1918";
