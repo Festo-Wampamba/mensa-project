@@ -39,12 +39,15 @@ try {
       <div class="logo-mark">M</div>
       MENSA
     </a>
-    <ul class="navbar-links">
+    <ul class="navbar-links" id="navLinks">
       <li><a href="index.php" class="active">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Our Team</a></li>
       <li><a href="contact.php" class="btn-nav">Contact Us</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -297,11 +300,11 @@ try {
   <div class="footer-inner">
     <p class="footer-copy">
       &copy; <?= date('Y') ?> MENSA Tech Agency &mdash;
-      Architected by
-      <span class="accent-name"><?= htmlspecialchars($lead['full_name'] ?? 'Wampamba Festo') ?></span>,
-      Lead Software Engineer &amp; Architect.
+      Architected by <span class="accent-name">Festo Wampamba</span>
+      as Lead Software Engineer and Mensa Team.
     </p>
     <ul class="footer-links">
+      <li><a href="https://github.com/Festo-Wampamba" target="_blank" rel="noopener">GitHub</a></li>
       <li><a href="index.php">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Team</a></li>
@@ -311,10 +314,24 @@ try {
 </footer>
 
 <script>
-  // Navbar scroll effect
+  // Navbar scroll
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
   });
+
+  // Mobile hamburger
+  const toggle   = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
 
   // Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
