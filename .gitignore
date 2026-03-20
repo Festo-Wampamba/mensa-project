@@ -1,0 +1,26 @@
+# ============================================================
+#  MENSA Project — .gitignore
+# ============================================================
+
+# Environment & secrets — NEVER commit these
+.env
+*.env.local
+*.env.production
+
+# Docker volumes & runtime data
+mysql_data/
+bind9_data/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP
+*.log
+/vendor/
