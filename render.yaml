@@ -1,0 +1,46 @@
+services:
+  # ── 1. DATABASE (Private Service - Not exposed to the public internet) ──
+  - type: pserv
+    name: mensa-db
+    env: docker
+    rootDir: mysql
+    # disk:                 # <-- NOTE: Uncomment this block if you upgrade to a paid Render plan. 
+    #   name: mysql-data    #     Free tiers do not support persistent disks. Without it, your 
+    #   mountPath: /var/lib/mysql # DB resets to the init.sql state daily.
+    #   sizeGB: 1
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: mensa_db
+      - key: MYSQL_USER
+        value: mensa_user
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_HOST
+        value: "%"
+
+  # ── 2. WEB SERVER (Public Web Service) ──
+  - type: web
+    name: mensa-web
+    env: docker
+    rootDir: .
+    envVars:
+      # Automatically map the internal network host
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: mensa-db
+          envVarKey: RENDER_INTERNAL_HOSTNAME
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: mensa_db
+      - key: DB_USER
+        value: mensa_user
+      # Securely grab the auto-generated password from the database
+      - key: DB_PASS
+        fromService:
+          type: pserv
+          name: mensa-db
+          envVarKey: MYSQL_PASSWORD
