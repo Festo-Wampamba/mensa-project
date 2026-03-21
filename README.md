@@ -630,4 +630,8 @@ git push origin main
 
 ## License
 
-GNU General Public License v3.0 — see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE) for details.
+
+This project was developed as a practical laboratory assignment for the Bachelor of Science
+in Computer Science programme at Makerere University, Academic Year 2023/2024.
+Copyright © 2024 MENSA Tech Agency — Wampamba Festo & Team.
