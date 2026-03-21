@@ -76,6 +76,7 @@ try {
       </div>
     <?php endif; ?>
 
+    <?php $iconMap = ['web-hosting'=>'&#127760;','software-development'=>'&#128187;','system-administration'=>'&#128421;&#65039;','networking'=>'&#128279;']; ?>
     <?php if (!empty($services)): ?>
       <div style="display:flex; flex-direction:column; gap:2rem;">
         <?php foreach ($services as $i => $svc): ?>
@@ -83,7 +84,7 @@ try {
           <article class="service-full reveal">
             <div>
               <div class="service-num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></div>
-              <div class="service-icon" style="margin-bottom:1.5rem;"><?= htmlspecialchars($svc['icon']) ?></div>
+              <div class="service-icon" style="margin-bottom:1.5rem;"><?= $iconMap[$svc['slug'] ?? ''] ?? htmlspecialchars($svc['icon']) ?></div>
               <h2 style="font-family:var(--font-display);font-size:1.7rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:1rem;">
                 <?= htmlspecialchars($svc['title']) ?>
               </h2>
