@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="contact-detail-icon">📍</div>
           <div class="contact-detail-text">
             <span>Location</span>
-            <p>Kampala, Uganda</p>
+            <p>Nakawa MUBS</p>
           </div>
         </div>
 
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="contact-detail-icon">📞</div>
           <div class="contact-detail-text">
             <span>Phone</span>
-            <a href="tel:+256700000001">+256 700 000 001</a>
+            <a href="tel:+256754230525">+256 754230525</a>
           </div>
         </div>
 
