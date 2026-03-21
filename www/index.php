@@ -135,13 +135,14 @@ try {
       </p>
     </div>
 
+    <?php $iconMap = ['web-hosting'=>'&#127760;','software-development'=>'&#128187;','system-administration'=>'&#128421;&#65039;','networking'=>'&#128279;']; ?>
     <div class="services-grid">
       <?php if (!empty($services)): ?>
         <?php foreach ($services as $i => $svc): ?>
           <?php $features = json_decode($svc['features'] ?? '[]', true) ?? []; ?>
           <article class="service-card reveal">
             <div class="service-number"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></div>
-            <div class="service-icon"><?= htmlspecialchars($svc['icon']) ?></div>
+            <div class="service-icon"><?= $iconMap[$svc['slug'] ?? ''] ?? htmlspecialchars($svc['icon']) ?></div>
             <h3 class="service-title"><?= htmlspecialchars($svc['title']) ?></h3>
             <p class="service-desc"><?= htmlspecialchars(mb_strimwidth($svc['description'], 0, 110, '…')) ?></p>
             <ul class="service-features">
@@ -287,8 +288,8 @@ try {
         <a href="team.php" class="btn-secondary">View Our Team</a>
       </div>
       <div class="contact-methods">
-        <div class="contact-pill">📍 Kampala, Uganda</div>
-        <div class="contact-pill">📞 +256 700 000 001</div>
+        <div class="contact-pill">📍 Nakawa MUBS</div>
+        <div class="contact-pill">📞 +256 754230525</div>
         <div class="contact-pill">🌐 bbcmensa.com</div>
       </div>
     </div>
