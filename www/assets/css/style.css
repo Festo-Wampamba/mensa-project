@@ -295,11 +295,7 @@ body::after {
   opacity: 0;
   animation: fadeUp 0.8s 0.2s forwards;
 }
-.hero-label::before {
-  content: '';
-  width: 32px; height: 1px;
-  background: var(--accent);
-}
+
 .hero-label span {
   font-family: var(--font-mono);
   font-size: 0.72rem;
