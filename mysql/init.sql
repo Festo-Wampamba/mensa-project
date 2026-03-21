@@ -8,6 +8,12 @@
 
 USE mensa_db;
 
+
+DROP TABLE IF EXISTS contact_submissions;
+DROP TABLE IF EXISTS team_members;
+DROP TABLE IF EXISTS services;
+
+
 -- ── Table: team_members ──────────────────────────────────────
 CREATE TABLE IF NOT EXISTS team_members (
     id          INT          UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -69,7 +75,7 @@ VALUES
     'Systems Engineer',
     'Engineering',
     'kawere.edrine@bbcmensa.com',
-    '+256 700 000 002',
+    '+256 787880410',
     '23/U/09440/PS',
     '2300709440',
     'Systems Engineer at MENSA specialising in infrastructure setup, server configuration, and system integration.',
@@ -83,7 +89,7 @@ VALUES
     'Network Engineer',
     'Networking',
     'kyarikundabakeine.grace@bbcmensa.com',
-    '+256 700 000 003',
+    '+256 769964637',
     '23/U/10491/PS',
     '2300710491',
     'Network Engineer at MENSA focused on LAN/WAN architecture, DNS configuration, and network security auditing.',
@@ -97,7 +103,7 @@ VALUES
     'Database Administrator',
     'Engineering',
     'kamari.zahellena@bbcmensa.com',
-    '+256 700 000 004',
+    '+256 742148786',
     '23/U/08844/PS',
     '2300708844',
     'Database Administrator at MENSA responsible for schema design, query optimisation, backup strategies, and data integrity.',
@@ -111,7 +117,7 @@ VALUES
     'Software Developer',
     'Software Development',
     'talemwa.daniella@bbcmensa.com',
-    '+256 700 000 005',
+    '+256 756232586',
     '23/U/17830/EVE',
     '2300717830',
     'Software Developer at MENSA building scalable web applications and REST APIs using modern development practices.',
@@ -125,7 +131,7 @@ VALUES
     'Web Developer',
     'Software Development',
     'awori.betsy@bbcmensa.com',
-    '+256 700 000 006',
+    '+256 707578488',
     '23/U/07084/PS',
     '2300707084',
     'Web Developer at MENSA specialising in frontend design, PHP backend development, and responsive user interfaces.',
@@ -139,7 +145,7 @@ VALUES
     'System Administrator',
     'System Administration',
     'tumusiime.elvin@bbcmensa.com',
-    '+256 700 000 007',
+    '+256 707013004',
     '23/U/18113/PS',
     '2300718113',
     'System Administrator at MENSA managing Linux servers, security hardening, automated backups, and performance monitoring.',
@@ -153,7 +159,7 @@ VALUES
     'Infrastructure Engineer',
     'System Administration',
     'mungujaki.samaxwell@bbcmensa.com',
-    '+256 700 000 008',
+    '+256 777088297',
     '23/U/12023/EVE',
     '2300712023',
     'Infrastructure Engineer at MENSA handling Docker orchestration, CI/CD pipelines, and deployment strategies.',
@@ -167,7 +173,7 @@ VALUES
     'Network Administrator',
     'Networking',
     'kirabo.queenester@bbcmensa.com',
-    '+256 700 000 009',
+    '+256 741779673',
     '23/U/24679/PS',
     '2300724679',
     'Network Administrator at MENSA overseeing firewall policy, VPN setup, bandwidth monitoring, and network incident response.',
