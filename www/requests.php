@@ -197,6 +197,7 @@ foreach ($submissions as $s) {
       <li><a href="index.php">Home</a></li>
       <li><a href="services.php">Services</a></li>
       <li><a href="team.php">Our Team</a></li>
+      <li><a href="requests.php" class="active">Job Cards</a></li>
       <li><a href="contact.php" class="btn-nav">Contact Us</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
